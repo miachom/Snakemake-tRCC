@@ -23,3 +23,16 @@ rule rule_name:
   shell:
     "terminal/command/here"
 ```
+
+An example of a rule that is using bwa_mem:
+```
+rule bwa_mem:
+  input:
+    "path/to/fastq/file1.fq",
+    "path/to/reference/genome.fa"
+  output:
+    "path/to/mapped/reads.bam"
+  shell:
+    "bwa mem {input} | samtools view -Sb - > {output}"
+```
+
