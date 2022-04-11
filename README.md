@@ -10,7 +10,7 @@ Snakemake workflows are executed in 3 phases:
 ## Breakdown of the README.md file
 1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
 2. [Customizing You Snakemake File](#Customize-Snakemake-File)
-a. [expand function](#The-expand()-function)
++ [expand function](#The-expand()-function)
 4. [Input Functions](#Input-Functions)
 
 
