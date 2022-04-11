@@ -5,7 +5,7 @@ This repository has syntax and explanations of Snakemake file code snippets and 
 ## Breakdown of the README.md file
 1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
 2. [Customizing You Snakemake File](#Customize-Snakemake-File)
-3. [YAML File Format](#YAML-File-Format)
+3. [Input Functions](#Input-Functions)
 
 
 ## Basics of Snakemake Files
@@ -142,6 +142,14 @@ rule bcftools_call:
 ```
 This is how to have multiple samples run from the configuration file.
 
+### YAML File Format
 
-## YAML File Format
+Example of adding multiple samples that works for the above example:
+```
+samples:
+  A: data/samples/A.fastq
+  B: data/samples/B.fastq
+```
+
+## Input Functions
 
