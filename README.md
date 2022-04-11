@@ -2,6 +2,11 @@
 Snakemake is a workflow management system tool. It is python based.
 This repository has syntax and explanations of Snakemake file code snippets and structure. It also contains many of the best practice applications required for production pipelines. 
 
+Snakemake workflows are executed in 3 phases:
+1. In the initialization phase, the files defining the workflow are parsed and all rules are instantiated. 
+2. In the DAG phase, the directed acyclic dependency graph of all jobs is built by filling wildcards and matching input files to output files.
+3. In the scheduling phase, the DAG of jobs is executed, with jobs started according to available resources.
+
 ## Breakdown of the README.md file
 1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
 2. [Customizing You Snakemake File](#Customize-Snakemake-File)
@@ -152,4 +157,25 @@ samples:
 ```
 
 ## Input Functions
+
+Since we stored the path to our FASTQ files in the cofig file, we can generalize other rules to use these paths.
+The expand() function in the list of input files of the rule bcftools_call are executed during the initialization phase. In this phase, we don't know about jobs, wildcard values and rule dependencies. Need to push it to the DAG phase.
+We are doing this because the BWA rule uses a *shell* directive and is using BASH not Python.
+Add this function to get all the paths and be able to run BWA on all the files in the configfile
+
+```
+def get_bwa_map_input_fastqs(wildcards):
+    return config["samples"][wildcards.sample]
+    
+rule bwa_map:
+    input:
+        "data/genome.fa",
+        get_bwa_map_input_fastqs
+    output:
+        "mapped_reads/{sample}.bam"
+    threads: 8
+    shell:
+        "bwa mem -t {threads} {input} | samtools view -Sb - > {output}"
+
+```
 
