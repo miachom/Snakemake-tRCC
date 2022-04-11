@@ -126,7 +126,7 @@ Example in workflow:
 configfile: "config.yaml"
 ```
 
-When passing the *configfile* directive, you can update the rules in the above sample to:
+When passing the *configfile* directive,use the expand() function and can update the rules in the above sample to:
 ```
 rule bcftools_call:
     input:
