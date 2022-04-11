@@ -3,10 +3,11 @@ Snakemake is a workflow management system tool. It is python based.
 This repository has syntax and explanations of Snakemake file code snippets and structure. It also contains many of the best practice applications required for production pipelines. 
 
 ## Breakdown of the README.md file
-1. [Base structure of the Snakemake file](#Basics)
+1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
+2. [Customizing You Snakemake File](#Customize-Snakemake-File)
 
 
-## Basics of Snakemake files
+## Basics of Snakemake Files
 Snakemake workflows are defined as rules. Rules decompose the workflow into smaller steps (in WDL these are the tasks).
 
 ### rule
@@ -114,3 +115,30 @@ rule plot_quals:
     script:
         "scripts/plot-quals.py"
 ```
+
+## Customize Snakemake File
+
+### Config files
+Previously saw adding a SAMPLE list into the above Snakemake file for passing sample information for the workflow. However, need the workflow to be customizable, easily adapted to new data. This is done with the config file mechanism which can be in .json or .yaml and passed with the *configfile* directive. This will be at the top of the Snakemake file and will look as seen below.
+
+Example in workflow:
+```
+configfile: "config.yaml"
+```
+
+When passing the *configfile* directive, you can update the rules in the above sample to:
+```
+rule bcftools_call:
+    input:
+        fa="data/genome.fa",
+        bam=expand("sorted_reads/{sample}.bam", sample=config["samples"]),
+        bai=expand("sorted_reads/{sample}.bam.bai", sample=config["samples"])
+    output:
+        "calls/all.vcf"
+    shell:
+        "samtools mpileup -g -f {input.fa} {input.bam} | "
+        "bcftools call -mv - > {output}"
+```
+This is how to have multiple samples run from the configuration file.
+
+
