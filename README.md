@@ -124,6 +124,7 @@ rule plot_quals:
 ```
 
 ## Customize Snakemake File
+
 ### The expand function
 
 The expand() function allows us to resolve and combine different variables.
@@ -137,6 +138,13 @@ samples:
   B: data/samples/B.fastq
 ```
 Would provide us with the output:[ A.bam, B.bam]
+
+We can also define the final target files in the *run all* workflow.
+```
+run all:
+    input:
+        expand("sorted_reads/{sample}.bam", sample=config["samples"])
+```
 
 ### Config files
 Previously saw adding a SAMPLE list into the above Snakemake file for passing sample information for the workflow. However, need the workflow to be customizable, easily adapted to new data. This is done with the config file mechanism which can be in .json or .yaml and passed with the *configfile* directive. This will be at the top of the Snakemake file and will look as seen below.
