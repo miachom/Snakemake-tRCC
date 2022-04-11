@@ -36,3 +36,20 @@ rule bwa_mem:
     "bwa mem {input} | samtools view -Sb - > {output}"
 ```
 
+When a workflow is executed, Snakemake trie to generate given target files. Target files can be specified via the command line by executing:
+```
+snakemake -np path/to/mapped/reads.bam
+```
+-n is for --dry_run, will show the execution plan instead of performing the steps.
+-p flag instructs to print results to ther shell command.
+
+To generate the target files, Snakemake applies the rules given in the Snakemake file in a top-down way.
+
+Can execute the code using:
+```
+snakemake --cores 1 path/to/mapped/reads.bam
+```
+Need to specify the number of cores used when executing a workflow. Can allow also for parallelization. 
+Snakemake will not try to create path/to/mapped/reads.bam again, because it is already present in the file system. 
+Snakemake only re-runs jobs if one of the input files is newer than one of the output files or one of the input files will be updated by another job.
+
