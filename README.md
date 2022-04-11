@@ -174,7 +174,7 @@ samples:
 
 Since we stored the path to our FASTQ files in the cofig file, we can generalize other rules to use these paths.
 The expand() function in the list of input files of the rule bcftools_call are executed during the initialization phase. In this phase, we don't know about jobs, wildcard values and rule dependencies. Need to push it to the DAG phase.
-We are doing this because we want the paths to the files not just the [A,B](#The-expand-function).
+We are doing this because we want the paths to the files not just the [A.bam and B.bam file names](#The-expand-function).
 Add this function to get all the paths and be able to run BWA on all the files in the configfile
 
 ```
