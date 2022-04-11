@@ -10,7 +10,8 @@ Snakemake workflows are executed in 3 phases:
 ## Breakdown of the README.md file
 1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
 2. [Customizing You Snakemake File](#Customize-Snakemake-File)
-3. [Input Functions](#Input-Functions)
+a. [expand function](#The-expand()-function)
+4. [Input Functions](#Input-Functions)
 
 
 ## Basics of Snakemake Files
@@ -123,6 +124,9 @@ rule plot_quals:
 ```
 
 ## Customize Snakemake File
+### The expand() function
+
+The expand() function allows us to resolve and combine different variables.
 
 ### Config files
 Previously saw adding a SAMPLE list into the above Snakemake file for passing sample information for the workflow. However, need the workflow to be customizable, easily adapted to new data. This is done with the config file mechanism which can be in .json or .yaml and passed with the *configfile* directive. This will be at the top of the Snakemake file and will look as seen below.
