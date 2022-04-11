@@ -53,3 +53,4 @@ Need to specify the number of cores used when executing a workflow. Can allow al
 Snakemake will not try to create path/to/mapped/reads.bam again, because it is already present in the file system. 
 Snakemake only re-runs jobs if one of the input files is newer than one of the output files or one of the input files will be updated by another job.
 
+Gerneralize the Snakemake workflow by using named wildcards.
