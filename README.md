@@ -10,7 +10,7 @@ Snakemake workflows are executed in 3 phases:
 ## Breakdown of the README.md file
 1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
 2. [Customizing You Snakemake File](#Customize-Snakemake-File)
-+ [expand function](#The-expand-function)
+    + [expand function](#The-expand-function)
 4. [Input Functions](#Input-Functions)
 
 
@@ -127,6 +127,16 @@ rule plot_quals:
 ### The expand function
 
 The expand() function allows us to resolve and combine different variables.
+```
+bam=expand("sorted_reads/{sample}.bam", sample=config["samples"])
+```
+where
+```
+samples:
+  A: data/samples/A.fastq
+  B: data/samples/B.fastq
+```
+Would provide us with the output:[ A.bam, B.bam]
 
 ### Config files
 Previously saw adding a SAMPLE list into the above Snakemake file for passing sample information for the workflow. However, need the workflow to be customizable, easily adapted to new data. This is done with the config file mechanism which can be in .json or .yaml and passed with the *configfile* directive. This will be at the top of the Snakemake file and will look as seen below.
@@ -164,7 +174,7 @@ samples:
 
 Since we stored the path to our FASTQ files in the cofig file, we can generalize other rules to use these paths.
 The expand() function in the list of input files of the rule bcftools_call are executed during the initialization phase. In this phase, we don't know about jobs, wildcard values and rule dependencies. Need to push it to the DAG phase.
-We are doing this because the BWA rule uses a *shell* directive and is using BASH not Python.
+We are doing this because we want the paths to the files not just the [A,B](#The-expand-function).
 Add this function to get all the paths and be able to run BWA on all the files in the configfile
 
 ```
