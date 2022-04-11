@@ -5,6 +5,24 @@ Clone the repo to your local directory
 git clone https://github.com/GavinHaLab/TitanCNA_SV_WGS.git
 ```
 
+Need also to clone the following repos:
++ TitanCNA
+```
+git clone https://github.com/gavinha/TitanCNA.git
+```
++ ichorCNA
+```
+git clone https://github.com/GavinHaLab/ichorCNA.git
+```
++ svaba
+```
+git clone --recursive https://github.com/walaj/svaba
+cd svaba
+./configure
+make
+make install
+```
+
 Samples to be analyzed should be in the config/samples.yaml file. Need to edit this file to include the samples you are working on. Need to be in the same format as the samples.yaml that comes with the repo.
 
 What to update in the config/samples.yaml
@@ -27,10 +45,10 @@ What to update in the config/config.yaml
 ## path to tools
 samTools:  /path/to/samtools
 bcfTools:  /path/to/bcftools
-svaba_exe:  /path/to/svaba
+svaba_exe:  /path/to/svaba #/home/ma1111/tools/svaba
 
 readCounterScript:  /path/to/readCounter
-ichorCNA_rscript:  /path/to/ichorCNA/scripts/runIchorCNA.R
+ichorCNA_rscript:  /path/to/ichorCNA/scripts/runIchorCNA.R #/home/ma1111/tools/ichorCNA/scripts/runIchorCNA.R
 
 TitanCNA_rscript: /path/to/TitanCNA/scripts/R_scripts/titanCNA.R
 
