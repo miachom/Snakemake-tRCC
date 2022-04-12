@@ -12,3 +12,33 @@ If you have cram files, use samtools to make them into bam files:
 samtools view -T <fasta_path> -b -o <bam_file_path> <cram_file_path>
 ```
 
+What to update in the config/samples.yaml
+```
+samples: #format is tumor_name: [tumor_filepath, matched_normal_name, matched_normal_filepath]
+  tumor_name1:  [/tumor1/filepath.bam, normal_name1, /normal1/filepath.bam]
+  tumor_name2:  [/tumor2/filepath.bam, normal_name2, /normal2/filepath.bam]
+```
+
+Parameters need to be adjusted in the config/config.yaml file. This includes path to java, gatk, tabix, picard.
+
+What to update in the config/config.yaml
+```
+reference_genome:
+    /path/to/genome.fa
+    
+mutect2_germline_resource:
+    /path/to/somatic-hg38_af-only-gnomad.hg38.vcf.gz
+    
+known_polymorphic_sites:
+    /path/to/somatic-hg38_small_exac_common_3.hg38.vcf.gz
+
+gatk: /path/to/gatk
+java: /path/to/java
+tabix: /path/to/tabix
+picard_jar: /path/to/picard.jar
+```
+
+To find Java path use:
+```
+which java
+```
