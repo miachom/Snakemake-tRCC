@@ -22,10 +22,18 @@ cd svaba
 make
 make install
 ```
++ HMMcopy
+```
+git clone https://github.com/shahcompbio/hmmcopy_utils.git
+```
 
-The readCounterScript comes from HMMcopy/bin/readCounter according to the config.yaml script in the ichorCNA/scripts/snakemake/config/config.yaml file.
+The readCounterScript comes from hmmcopy_utils/src/bin/readCounter.cpp
 
-Samples to be analyzed should be in the config/samples.yaml file. Need to edit this file to include the samples you are working on. Need to be in the same format as the samples.yaml that comes with the repo.
+Samples to be analyzed should be in the config/samples.yaml file. Need to edit this file to include the samples you are working on. Need to be in the same format as the samples.yaml that comes with the repo. Samples need to be in .bam format.
+If you have cram files, use samtools to make them into bam files:
+```
+samtools view -T <fasta_path> -b -o <bam_file_path> <cram_file_path>
+```
 
 What to update in the config/samples.yaml
 ```
