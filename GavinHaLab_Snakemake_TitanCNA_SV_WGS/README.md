@@ -89,12 +89,3 @@ ichorCNA_centromere:  /path/to/ichorCNA/inst/extdata/GRCh38.GCA_000001405.2_cent
 svaba_dbSNPindelVCF:  /path/to/resources_broad_hg38_v0_Homo_sapiens_assembly38.known_indels.vcf.gz
 ```
 
-Need to load these modules in your terminal before running
-```
-ml snakemake/5.19.2-foss-2019b-Python-3.7.4
-ml R/3.6.2-foss-2019b-fh1
-ml Python/3.7.4-foss-2019b-fh1
-ml BCFtools/1.9-GCC-8.3.0
-ml Pysam/0.15.4-GCC-8.3.0-Python-3.7.4
-ml PyYAML/5.1.2-GCCcore-8.3.0-Python-3.7.4
-```
