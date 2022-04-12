@@ -25,9 +25,12 @@ make install
 + HMMcopy
 ```
 git clone https://github.com/shahcompbio/hmmcopy_utils.git
+cd hmmcopy_utils
+cmake .
+make
 ```
-
-The readCounterScript comes from hmmcopy_utils/src/bin/readCounter.cpp
+This compiles the C++ script hmmcopy_utils/src/bin/readCounter.cpp
+The readCounterScript comes from hmmcopy_utils/bin/readCounter (Above script needs to be compiled using cmake . and make)
 
 Samples to be analyzed should be in the config/samples.yaml file. Need to edit this file to include the samples you are working on. Need to be in the same format as the samples.yaml that comes with the repo. Samples need to be in .bam format.
 If you have cram files, use samtools to make them into bam files:
