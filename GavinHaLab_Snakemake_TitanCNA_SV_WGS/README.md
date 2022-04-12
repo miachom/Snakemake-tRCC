@@ -23,6 +23,8 @@ make
 make install
 ```
 
+The readCounterScript comes from HMMcopy/bin/readCounter according to the config.yaml script in the ichorCNA/scripts/snakemake/config/config.yaml file.
+
 Samples to be analyzed should be in the config/samples.yaml file. Need to edit this file to include the samples you are working on. Need to be in the same format as the samples.yaml that comes with the repo.
 
 What to update in the config/samples.yaml
