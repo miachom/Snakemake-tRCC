@@ -1,5 +1,13 @@
 # How to run the Snakemake workflow for [TitanCNA_SV_WGS from Gavin Ha Lab on github](https://github.com/GavinHaLab/TitanCNA_SV_WGS)
 
+## Breakdown of the README.md file
+1. [How to set up requirements for code to work](#How-to-set-up-requirements-for-code-to-work)
+2. [Workflow of TitanCNA](#Workflow-of-TitanCNA)
+3. [Workflow of SvABA](#Workflow-of-SvABA)
+4. [Workflow of TitanCNA_SV_WGS](#Workflow-of-TitanCNA_SV_WGS)
+
+
+## How to set up requirements for code to work
 Clone the repo to your local directory
 ```
 git clone https://github.com/GavinHaLab/TitanCNA_SV_WGS.git
