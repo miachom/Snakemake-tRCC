@@ -132,7 +132,8 @@ In the TitanCNA.snakefile, there are the functions: runTitanCNA, combineTitanAnd
 
 **getAlleleCounts.snakefile output**
 1. *getHETsites* creates the directory results/titan/hetPosns and creates a .vcf file per chromosome
-2. *getAlleleCountsByChr* creates the directory results/titan/tumCounts and creates a .txt file per chromosome
+2. *getAlleleCountsByChr* creates the directory results/titan/tumCounts and creates a .txt file per chromosome. Header info: Chr	Position	Ref	RefCount	Nref	NrefCount	NormQuality
+3. 
 
 **TitanCNA.snakefile output**
 1. creates the directory results/titan/hmm/ and the following extensions titan.ichor.cna.txt, titan.ichor.seg.txt, titan.txt per ploidy
