@@ -115,26 +115,26 @@ In the TitanCNA.snakefile, there are the functions: runTitanCNA, combineTitanAnd
 
 ### Inputs of the snakefiles
 
-ichorCNA.snakefile input 
+**ichorCNA.snakefile input**
 1. *read_counter* takes in Normal sample and tumor sample bam files
 
-getAlleleCounts.snakefile intput
+**getAlleleCounts.snakefile intput**
 1. *getHETsites* takes in per chromosome data
 2. *getAlleleCountsByChr*  takes in *read_counter* results/titan/hetPosns and tumor bam information per chromosome
 
-TitanCNA.snakefile intput
+**TitanCNA.snakefile intput**
 1. 
 
 ### Outputs of the snakefiles
 
-ichorCNA.snakefile output 
+**ichorCNA.snakefile output**
 1. *read_counter* creates the directory results/readDepth/ and the following extension files {samples}.bin{binSize}.wig
 
-getAlleleCounts.snakefile output
+**getAlleleCounts.snakefile output**
 1. *getHETsites* creates the directory results/titan/hetPosns and creates a .vcf file per chromosome
 2. *getAlleleCountsByChr* creates the directory results/titan/tumCounts and creates a .txt file per chromosome
 
-TitanCNA.snakefile output
+**TitanCNA.snakefile output**
 1. creates the directory results/titan/hmm/ and the following extensions titan.ichor.cna.txt, titan.ichor.seg.txt, titan.txt per ploidy
 
 
