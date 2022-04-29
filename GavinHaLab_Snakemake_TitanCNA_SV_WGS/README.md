@@ -6,7 +6,7 @@
 3. [Workflow for TitanCNA](#Workflow-for_TitanCNA)
 
 ## How to set up requirements for code to work
-Clone the repo to your local directory
+Clone the repo to your local directory. But make sure not to use the ichorCNA from Broad and install all the dependedncies.
 ```
 git clone https://github.com/GavinHaLab/TitanCNA_SV_WGS.git
 ```
