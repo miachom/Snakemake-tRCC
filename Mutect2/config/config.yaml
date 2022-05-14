@@ -1,1 +1,7 @@
-# Config file containing information for the mutect2.snakefile
+##Config file containing information for the mutect2.snakefile
+
+## Tools Path
+gatk_path: /mnt/storage/apps/gatk-4.2.5.0
+
+## Reference Genome
+
