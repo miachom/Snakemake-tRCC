@@ -4,7 +4,7 @@
 gatk_path: /mnt/storage/apps/gatk-4.2.5.0
 
 ## Path to reference files
-refGenome: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.fasta
+reference_genome: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.fasta
 germline_resource: /mnt/storage/labs/sviswanathan/GATK_ref/af-only-gnomad.hg38.vcf.gz
 panel_of_normals: /mnt/storage/labs/sviswanathan/GATK_ref/1000g_pon.hg38.vcf.gz
 f1r2_tar_gz: /home/ma1111/tRCC_data/mutect_run/mutect_run4.2.5.0/BTRCC18/combined/BTRCC_18_comb_nointervals_f1r2.tar.gz
