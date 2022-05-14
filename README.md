@@ -44,7 +44,7 @@ rule bwa_mem:
     "bwa mem {input} | samtools view -Sb - > {output}"
 ```
 
-When a workflow is executed, Snakemake trie to generate given target files. Target files can be specified via the command line by executing:
+When a workflow is executed, Snakemake tries to generate given target files. Target files can be specified via the command line by executing:
 ```
 snakemake -np path/to/mapped/reads.bam
 ```
@@ -52,6 +52,9 @@ snakemake -np path/to/mapped/reads.bam
 -p flag instructs to print results to ther shell command.
 
 To generate the target files, Snakemake applies the rules given in the Snakemake file in a top-down way.
+
+Apart from filenames, Snakemake also accepts rule names as targets if the requested rule does not have wildcards. Hence, it is possible to write target rules collecting particular subsets of the desired results or all results. Moreover, if no target is given at the command line, Snakemake will define the first rule of the Snakefile as the target. Hence, it is best practice to have a rule **all** at the top of the workflow which has all typically desired target files as input files.    
+
 
 Can execute the code using:
 ```
