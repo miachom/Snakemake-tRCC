@@ -3,5 +3,12 @@
 ## Tools Path
 gatk_path: /mnt/storage/apps/gatk-4.2.5.0
 
-## Reference Genome
+## Path to reference files
+refGenome: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.fasta
+germline_resource: /mnt/storage/labs/sviswanathan/GATK_ref/af-only-gnomad.hg38.vcf.gz
+panel_of_normals: /mnt/storage/labs/sviswanathan/GATK_ref/1000g_pon.hg38.vcf.gz
+f1r2_tar_gz: /home/ma1111/tRCC_data/mutect_run/mutect_run4.2.5.0/BTRCC18/combined/BTRCC_18_comb_nointervals_f1r2.tar.gz
+
+#Interval chromosomes
+chromosomes: ['chr1','chr2','chr3','chr4','chr5','chr6','chr7','chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16','chr17','chr18','chr19','chr20','chr21','chr22','chrX', 'chrY']
 
