@@ -2,7 +2,9 @@ configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
 print(config["samples"])
-print(lambda wildcards: config["samples"][wildcards.samples])
+
+tumor_filepath = lambda wildcards: config["samples"][wildcards.samples]
+print(tumor_filepath)
  
 rule correctDepth:
     input:
