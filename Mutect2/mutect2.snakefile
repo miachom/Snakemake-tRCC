@@ -1,7 +1,7 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
-config["samples"].print()
+print(config["samples"])
  
 rule correctDepth:
     input:
