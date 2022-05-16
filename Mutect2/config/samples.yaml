@@ -1,5 +1,7 @@
 #samples.yaml for mutect2.snakefile
 
+base_file_name : B_TRCC_18
+
 samples: [ /mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Tumor/v1/B_TRCC_18_Tumor.cram ,
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LeftMedLNTum_1/v1/LeftMedLNTum_1.cram ,
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_1/v1/LiverTum_1.cram ,
