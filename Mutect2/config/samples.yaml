@@ -1,1 +1,7 @@
+#samples.yaml for mutect2.snakefile
+
+samples:
+  tumors: []
+  normals: []
+  
 
