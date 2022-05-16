@@ -25,7 +25,7 @@ rule mutect2:
         panel_of_normals = config["panel_of_normals"],
         normals = lambda wildcards: config["normals"][wildcards.base_file_name]
     log:
-        "logs/mutect2/{tumors}_{chromosomes}_mutect2.txt"
+        "logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
     shell:
         "({params.gatk} Mutect2 \
         -reference {params.reference_genome} \
