@@ -1,12 +1,9 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
-print(list(config["samples"].values()))
+print(config["normals"])
 
-tumor_filepath = list(config["samples"].values())
-print(tumor_filepath)
- 
-rule correctDepth:
+rule all:
     input:
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
@@ -15,7 +12,7 @@ rule correctDepth:
 
 rule mutect2:
     input:
-        tumor_filepath = lambda wildcards: config["samples"][wildcards.samples]
+        tumor_filepath = list(config["samples"].values())
         
     output:
         vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
