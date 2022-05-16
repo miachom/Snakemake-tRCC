@@ -1,7 +1,7 @@
 ##Config file containing information for the mutect2.snakefile
 
 ## Tools Path
-gatk_path: /mnt/storage/apps/gatk-4.2.5.0
+gatk_path: /mnt/storage/apps/gatk-4.2.5.0/gatk
 
 ## Path to reference files
 reference_genome: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.fasta
