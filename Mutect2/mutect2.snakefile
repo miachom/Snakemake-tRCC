@@ -7,8 +7,8 @@ rule all:
         
 rule mutect2:
     input:
-        tumor_filepath = lambda wildcards: config["samples"][wildcards.tumors][0],
-        normal_filepath = lambda wildcards: config["samples"][wildcards.tumors][2]
+        tumor_filepath = lambda wildcards: config["samples"][wildcards.tumors],
+        normal_filepath = lambda wildcards: config["samples"][wildcards.tumors]
     output:
         vcf = temp("results/{tumors}/unfiltered_{chromosomes}.vcf.gz"),
         tbi = temp("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.tbi"),
