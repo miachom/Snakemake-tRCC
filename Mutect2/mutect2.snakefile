@@ -33,7 +33,7 @@ rule mutect2:
         -input {input.tumor_filepath} \
         -normal {params.normals} \
         -intervals {wildcards.chromosomes} \
-        --germline-resource {params.mutect2_germline_resource} \
+        --germline-resource {params.germline_resource} \
         --f1r2-tar-gz {output.tar} \
         --panel-of-normals {params.panel_of_normals} \
         -output {output.vcf}) 2> {log}"
