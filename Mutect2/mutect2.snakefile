@@ -1,8 +1,6 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
-print(config["normals"])
-
 rule all:
     input:
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
@@ -25,7 +23,7 @@ rule mutect2:
         germline_resource = config["germline_resource"],
         gatk = config["gatk_path"],
         panel_of_normals = config["panel_of_normals"],
-        normals = lambda wildcards: config["normals"][wildcards.normals]
+        normals = config["normals"]
         
     log:
         "logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
