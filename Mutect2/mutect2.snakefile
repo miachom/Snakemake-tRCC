@@ -24,6 +24,7 @@ rule mutect2:
         gatk = config["gatk_path"],
         panel_of_normals = config["panel_of_normals"],
         normals = lambda wildcards: config["normals"][wildcards.normals]
+        samples = config["samples"][wildcards.samples]
     log:
         "logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
     shell:
