@@ -223,6 +223,7 @@ samples:
     A: data/samples/A.fastq
     B: data/samples/B.fastq
 ```
+Snakemake gets wildcards from the parsing the input/output file names. 
 
 ## Errors and How-to Solve Them
 
