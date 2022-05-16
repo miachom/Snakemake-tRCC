@@ -10,7 +10,7 @@ rule all:
 
 rule mutect2:
     input:
-        tumor_filepath = lambda wildcards: config["samples"][wildcards.tumor_paths]
+        tumor_filepath = lambda wildcards: config["samples"][wildcards.base_file_name]
         
     output:
         vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
@@ -23,8 +23,7 @@ rule mutect2:
         germline_resource = config["germline_resource"],
         gatk = config["gatk_path"],
         panel_of_normals = config["panel_of_normals"],
-        normals = lambda wildcards: config["normals"][wildcards.normals],
-        base_file_name = config["base_file_name"]
+        normals = lambda wildcards: config["normals"][wildcards.base_file_name]
     log:
         "logs/mutect2/{tumors}_{chromosomes}_mutect2.txt"
     shell:
