@@ -1,7 +1,9 @@
 #samples.yaml for mutect2.snakefile
 
 samples:
-  tumors: []
-  normals: []
+  inputs: [/mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Tumor/v1/B_TRCC_18_Tumor.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LeftMedLNTum_1/v1/LeftMedLNTum_1.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_1/v1/LiverTum_1.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_2/v1/LiverTum_2.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_3/v1/LiverTum_3.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_4/v1/LiverTum_4.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_5/v1/LiverTum_5.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_6/v1/LiverTum_6.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LungPlTum_1/v1/LungPlTum_1.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LungPlTum_2/v1/LungPlTum_2.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LungPlTum_3/v1/LungPlTum_3.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/RPLNTum_1/v1/RPLNTum_1.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/RPLNTum_2/v1/RPLNTum_2.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/RPLNTum_3/v1/RPLNTum_3.cram , /mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Normal/v1/B_TRCC_18_Normal.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/LiverNormal/v1/LiverNormal.cram , /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/KidneyNormal/v1/KidneyNormal.cram]
+
+normals: 
+  normals: [B_TRCC_18_Normal , LiverNormal , KidneyNormal]
   
 
