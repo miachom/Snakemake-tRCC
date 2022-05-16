@@ -1,6 +1,13 @@
 configfile: "config/samples.yaml"
-configfile: "config/config.yaml"
-        
+configfile: "config/config.yaml" 
+ 
+rule all:
+    input:
+        expand("results/{tumors}/unfiltered_{chromosomes}.vcf.gz",tumors=config["samples"],chromosomes=config["chromosomes"]),
+        expand("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.tbi",tumors=config["samples"],chromosomes=config["chromosomes"]),
+        expand("results/{tumors}/unfiltered_{chromosomes}_f1r2.tar.gz",tumors=config["samples"],chromosomes=config["chromosomes"]),
+        expand("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.stats",tumors=config["samples"],chromosomes=config["chromosomes"]),
+
 rule mutect2:
     input:
         tumor_filepath = lambda wildcards: config["samples"][wildcards.tumors]
