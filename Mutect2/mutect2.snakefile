@@ -1,7 +1,7 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
-print(config["samples"])
+print(config["samples"].values())
 
 tumor_filepath = lambda wildcards: config["samples"][wildcards.samples]
 print(tumor_filepath)
