@@ -13,6 +13,7 @@ Snakemake workflows are executed in 3 phases:
     + [expand function](#The-expand-function)
 3. [Input Functions](#Input-Functions)
 4. [Lambda Expressions and wildcards](#Lambda-Expressions-and-wildcards)
+5. [Errors and How-to Solve Them](#Errors-and-How-to-Solve-them)
 
 
 ## Basics of Snakemake Files
@@ -222,4 +223,8 @@ samples:
     A: data/samples/A.fastq
     B: data/samples/B.fastq
 ```
+
+## Errors and How-to Solve Them
+
+
 
