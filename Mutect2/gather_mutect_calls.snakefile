@@ -11,7 +11,7 @@ rule all:
 
 rule mutect2:
     input:
-        tumor_filepath = list(config["samples"].values())
+        tumor_filepath = config["samples"]
         
     output:
         vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
