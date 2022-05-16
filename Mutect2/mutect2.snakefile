@@ -3,14 +3,15 @@ configfile: "config/config.yaml"
  
 rule all:
     input:
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
 
 rule mutect2:
     input:
         tumor_filepath = lambda wildcards: config["samples"][wildcards.tumor_paths]
+        
     output:
         vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
         tbi = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
