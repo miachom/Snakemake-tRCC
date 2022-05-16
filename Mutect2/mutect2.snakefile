@@ -1,7 +1,7 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
  
-rule all:
+rule correctDepth:
     input:
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
