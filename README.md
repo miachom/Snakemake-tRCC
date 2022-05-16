@@ -229,4 +229,4 @@ samples:
 1. WorkflowError: Target rules may not contain wildcards. Please specify concrete files or a rule without wildcards.
 Workflow requires a **rules all:** to have target files written to.
 
-
+2. KeyError: 'inputs' Wildcards: tumors=inputs chromosomes=chr1
