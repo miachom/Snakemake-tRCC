@@ -3,19 +3,19 @@ configfile: "config/config.yaml"
  
 rule all:
     input:
-        expand("results/{tumors}/unfiltered_{chromosomes}.vcf.gz",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.tbi",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{tumors}/unfiltered_{chromosomes}_f1r2.tar.gz",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.stats",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",tumors=config["base_file_name"],chromosomes=config["chromosomes"]),
 
 rule mutect2:
     input:
         tumor_filepath = lambda wildcards: config["samples"][wildcards.tumor_paths]
     output:
-        vcf = temp("results/{tumors}/unfiltered_{chromosomes}.vcf.gz"),
-        tbi = temp("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-        tar = temp("results/{tumors}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-        stats = temp("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.stats")
+        vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
+        tbi = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+        tar = temp("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+        stats = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
     params:
         # Edited these to match my config.yaml file
         reference_genome = config["reference_genome"],
