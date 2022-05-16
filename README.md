@@ -230,3 +230,4 @@ samples:
 Workflow requires a **rules all:** to have target files written to.
 
 2. KeyError: 'inputs' Wildcards: tumors=inputs chromosomes=chr1
+Error with how the samples.yaml had listed the different tumors. Break them apart and follow the samples format in the Mutect2 directory.
