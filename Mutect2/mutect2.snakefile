@@ -22,7 +22,8 @@ rule mutect2:
         germline_resource = config["germline_resource"],
         gatk = config["gatk_path"],
         panel_of_normals = config["panel_of_normals"],
-        normals = lambda wildcards: config["normals"][wildcards.normals]
+        normals = lambda wildcards: config["normals"][wildcards.normals],
+        base_file_name = config["base_file_name"]
     log:
         "logs/mutect2/{tumors}_{chromosomes}_mutect2.txt"
     shell:
