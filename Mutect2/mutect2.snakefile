@@ -2,6 +2,7 @@ configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
 print(config["samples"])
+print(lambda wildcards: config["samples"][wildcards.samples])
  
 rule correctDepth:
     input:
