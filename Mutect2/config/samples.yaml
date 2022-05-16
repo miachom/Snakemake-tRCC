@@ -2,24 +2,7 @@
 
 base_file_name : B_TRCC_18
 
-samples: 
-     B_TRCC_18_Tumor.cram : /mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Tumor/v1/B_TRCC_18_Tumor.cram 
-     LeftMedLNTum_1.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LeftMedLNTum_1/v1/LeftMedLNTum_1.cram
-     LiverTum_1.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_1/v1/LiverTum_1.cram
-     LiverTum_2.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_2/v1/LiverTum_2.cram
-     LiverTum_3.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_3/v1/LiverTum_3.cram
-     LiverTum_4.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_4/v1/LiverTum_4.cram
-     LiverTum_5.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_5/v1/LiverTum_5.cram
-     LiverTum_6.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_6/v1/LiverTum_6.cram
-     LungPlTum_1.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LungPlTum_1/v1/LungPlTum_1.cram
-     LungPlTum_2.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LungPlTum_2/v1/LungPlTum_2.cram
-     LungPlTum_3.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LungPlTum_3/v1/LungPlTum_3.cram
-     RPLNTum_1.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/RPLNTum_1/v1/RPLNTum_1.cram
-     RPLNTum_2.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/RPLNTum_2/v1/RPLNTum_2.cram
-     RPLNTum_3.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/RPLNTum_3/v1/RPLNTum_3.cram
-     B_TRCC_18_Normal.cram : /mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Normal/v1/B_TRCC_18_Normal.cram
-     LiverNormal.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/LiverNormal/v1/LiverNormal.cram
-     KidneyNormal.cram : /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/KidneyNormal/v1/KidneyNormal.cram
+samples: /home/mi724/Tools/Snakemake/Mutect2/bam.list
 
 normals: [ B_TRCC_18_Normal , LiverNormal , KidneyNormal ]
   
