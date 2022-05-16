@@ -11,7 +11,8 @@ Snakemake workflows are executed in 3 phases:
 1. [Base structure of the Snakemake file](#Basics-of-Snakemake-Files)
 2. [Customizing You Snakemake File](#Customize-Snakemake-File)
     + [expand function](#The-expand-function)
-4. [Input Functions](#Input-Functions)
+3. [Input Functions](#Input-Functions)
+4. [Lambda Expressions and wildcards](#Lambda-Expressions-and-wildcards)
 
 
 ## Basics of Snakemake Files
@@ -202,5 +203,23 @@ rule bwa_map:
     shell:
         "bwa mem -t {threads} {input} | samtools view -Sb - > {output}"
 
+```
+
+## Lambda Expressions and wildcards
+Small functions can be written by using the **lambda** keyword. 
+General syntax: lambda *arguments* : *expression*
+wildcards can be used in the input, output and params but not in the shell commands inside the rule.
+
+Example:
+```
+lambda wildcards: config["samples"][wildcards.sample]
+```
+The input function takes the argument a *wildcards* object, this allows access to the wildcards values. Can return a string or a list of strings that are interpreted as paths to input files.
+
+config file for the example:
+```
+samples:
+    A: data/samples/A.fastq
+    B: data/samples/B.fastq
 ```
 
