@@ -1,7 +1,6 @@
 #samples.yaml for mutect2.snakefile
 
-samples:
-  B_TRCC_18: [ /mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Tumor/v1/B_TRCC_18_Tumor.cram ,
+samples: [ /mnt/scratch/BTRCC_18_Aug2021/B_TRCC_18_Tumor/v1/B_TRCC_18_Tumor.cram ,
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LeftMedLNTum_1/v1/LeftMedLNTum_1.cram ,
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_1/v1/LiverTum_1.cram ,
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/tumor/WGS/LiverTum_2/v1/LiverTum_2.cram ,
@@ -19,7 +18,6 @@ samples:
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/LiverNormal/v1/LiverNormal.cram ,
             /mnt/storage/labs/sviswanathan/tRCC_data/BTRCC_18_Feb2022/KidneyNormal/v1/KidneyNormal.cram ]
 
-normals: 
-  normals: [ B_TRCC_18_Normal , LiverNormal , KidneyNormal ]
+normals: [ B_TRCC_18_Normal , LiverNormal , KidneyNormal ]
   
 
