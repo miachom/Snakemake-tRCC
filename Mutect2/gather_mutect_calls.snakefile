@@ -47,7 +47,7 @@ rule learn_read_orientation_model:
     output:
         protected("results/{tumors}/read_orientation_model.tar.gz")
     params:
-        gatk = config["gatk"]
+        gatk = config["gatk_path"]
     log:
         "logs/learn_read_orientation_model/{tumors}_learn_read_orientation_model.txt"
     shell:
