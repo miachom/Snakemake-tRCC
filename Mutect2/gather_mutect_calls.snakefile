@@ -1,3 +1,5 @@
+import os
+
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
@@ -38,7 +40,6 @@ rule mutect2:
         --f1r2-tar-gz {output.tar} \
         --panel-of-normals {params.panel_of_normals} \
         -output {output.vcf}) 2> {log}"
-
 
 
 rule gather_mutect_calls:
