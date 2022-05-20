@@ -3,7 +3,7 @@
 base_file_name : B_TRCC_18
 
 samples: /home/mi724/Tools/Snakemake/Mutect2/bam.list
-
+vcf_files: /home/mi724/Tools/Snakemake/Mutect2/vcf_file.list
 normals: /home/mi724/Tools/Snakemake/Mutect2/normals.list
   
 
