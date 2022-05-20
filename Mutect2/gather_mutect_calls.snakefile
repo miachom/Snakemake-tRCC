@@ -41,33 +41,23 @@ rule mutect2:
         --panel-of-normals {params.panel_of_normals} \
         -output {output.vcf}) 2> {log}"
 
+rule learn_read_orientation_model:
+    input:
+        f1r2 = config["f1r2"]
+    output:
+        protected("results/{tumors}/read_orientation_model.tar.gz")
+    params:
+        gatk = config["gatk"]
+    log:
+        "logs/learn_read_orientation_model/{tumors}_learn_read_orientation_model.txt"
+    shell:
+        "({params.gatk} LearnReadOrientationModel \
+        -I {input.f1r2} \
+        -O {output}) 2> {log}"
 
 rule gather_mutect_calls:
     input:
-        chr1_calls = "results/{base_file_name}/unfiltered_chr1.vcf.gz",
-        chr2_calls = "results/{base_file_name}/unfiltered_chr2.vcf.gz",
-        chr3_calls = "results/{base_file_name}/unfiltered_chr3.vcf.gz",
-        chr4_calls = "results/{base_file_name}/unfiltered_chr4.vcf.gz",
-        chr5_calls = "results/{base_file_name}/unfiltered_chr5.vcf.gz",
-        chr6_calls = "results/{base_file_name}/unfiltered_chr6.vcf.gz",
-        chr7_calls = "results/{base_file_name}/unfiltered_chr7.vcf.gz",
-        chr8_calls = "results/{base_file_name}/unfiltered_chr8.vcf.gz",
-        chr9_calls = "results/{base_file_name}/unfiltered_chr9.vcf.gz",
-        chr10_calls = "results/{base_file_name}/unfiltered_chr10.vcf.gz",
-        chr11_calls = "results/{base_file_name}/unfiltered_chr11.vcf.gz",
-        chr12_calls = "results/{base_file_name}/unfiltered_chr12.vcf.gz",
-        chr13_calls = "results/{base_file_name}/unfiltered_chr13.vcf.gz",
-        chr14_calls = "results/{base_file_name}/unfiltered_chr14.vcf.gz",
-        chr15_calls = "results/{base_file_name}/unfiltered_chr15.vcf.gz",
-        chr16_calls = "results/{base_file_name}/unfiltered_chr16.vcf.gz",
-        chr17_calls = "results/{base_file_name}/unfiltered_chr17.vcf.gz",
-        chr18_calls = "results/{base_file_name}/unfiltered_chr18.vcf.gz",
-        chr19_calls = "results/{base_file_name}/unfiltered_chr19.vcf.gz",
-        chr20_calls = "results/{base_file_name}/unfiltered_chr20.vcf.gz",
-        chr21_calls = "results/{base_file_name}/unfiltered_chr21.vcf.gz",
-        chr22_calls = "results/{base_file_name}/unfiltered_chr22.vcf.gz",
-        chrX_calls = "results/{base_file_name}/unfiltered_chrX.vcf.gz",
-        chrY_calls = "results/{base_file_name}/unfiltered_chrY.vcf.gz"
+        vcf_files = config["vcf_files"]
     output:
         temp("results/{base_file_name}/gathered_unfiltered.vcf.gz")
     params:
@@ -77,29 +67,7 @@ rule gather_mutect_calls:
         "logs/gather_mutect_calls/{base_file_name}_gather_mutect_calls.txt"
     shell:
         "({params.java} -jar {params.picard_jar} GatherVcfs \
-        I={input.chr1_calls} \
-        I={input.chr2_calls} \
-        I={input.chr3_calls} \
-        I={input.chr4_calls} \
-        I={input.chr5_calls} \
-        I={input.chr6_calls} \
-        I={input.chr7_calls} \
-        I={input.chr8_calls} \
-        I={input.chr9_calls} \
-        I={input.chr10_calls} \
-        I={input.chr11_calls} \
-        I={input.chr12_calls} \
-        I={input.chr13_calls} \
-        I={input.chr14_calls} \
-        I={input.chr15_calls} \
-        I={input.chr16_calls} \
-        I={input.chr17_calls} \
-        I={input.chr18_calls} \
-        I={input.chr19_calls} \
-        I={input.chr20_calls} \
-        I={input.chr21_calls} \
-        I={input.chr22_calls} \
-        I={input.chrX_calls} \
-        I={input.chrY_calls} \
+        I={input.vcf_files} \
         O={output}) 2> {log}"
+ 
 
