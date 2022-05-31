@@ -5,43 +5,14 @@ configfile: "config/config.yaml"
 
 rule all:
     input:
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"]),
+        #expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        #expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        #expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        #expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"])
         expand("results/{tumors}/mutect_merged.stats", tumors = config["samples"]),
         expand("results/{tumors}/read_orientation_model.tar.gz", tumors = config["samples"]),
 
-rule mutect2:
-    input:
-        tumor_filepath = config["samples"]
-        
-    output:
-        vcf = protected("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
-        tbi = protected("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-        tar = protected("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-        stats = protected("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
-    params:
-        # Edited these to match my config.yaml file
-        reference_genome = config["reference_genome"],
-        germline_resource = config["germline_resource"],
-        gatk = config["gatk_path"],
-        panel_of_normals = config["panel_of_normals"],
-        normals = config["normals"]
-        
-    log:
-        "logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
-    shell:
-        "({params.gatk} Mutect2 \
-        -reference {params.reference_genome} \
-        -input {input.tumor_filepath} \
-        -normal {params.normals} \
-        -intervals {wildcards.chromosomes} \
-        --germline-resource {params.germline_resource} \
-        --f1r2-tar-gz {output.tar} \
-        --panel-of-normals {params.panel_of_normals} \
-        -output {output.vcf}) 2> {log}"
 
 rule merge_mutect_stats:
     input:
