@@ -70,7 +70,7 @@ rule merge_mutect_stats:
     output:
         protected("results/{tumors}/mutect_merged.stats")
     params:
-        gatk = config["gatk"]
+        gatk = config["gatk_path"]
     log:
         "logs/merge_mutect_stats/{tumors}_merge_mutect_stats.txt"
     shell:
@@ -130,7 +130,7 @@ rule learn_read_orientation_model:
     output:
         protected("results/{tumors}/read_orientation_model.tar.gz")
     params:
-        gatk = config["gatk"]
+        gatk = config["gatk_path"]
     log:
         "logs/learn_read_orientation_model/{tumors}_learn_read_orientation_model.txt"
     shell:
@@ -168,7 +168,7 @@ rule get_pileup_summaries:
     output:
         protected("results/{tumors}/pileup_summaries.table")
     params:
-        gatk = config["gatk"],
+        gatk = config["gatk_path"],
         known_polymorphic_sites = config["known_polymorphic_sites"]
     log:
         "logs/get_pileup_summaries/{tumors}_get_pileup_summaries.txt"
@@ -187,7 +187,7 @@ rule calculate_contamination:
         segments_table = protected("results/{tumors}/segments.table"),
         contamination_table = protected("results/{tumors}/contamination.table")
     params:
-        gatk = config["gatk"]
+        gatk = config["gatk_path"]
     log:
         "logs/calculate_contamination/{tumors}_calculate_contamination.txt"
     shell:
