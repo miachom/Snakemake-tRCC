@@ -162,24 +162,6 @@ rule learn_read_orientation_model:
         -O {output}) 2> {log}"
 
 
-rule get_pileup_summaries:
-    input:
-        lambda wildcards: config["samples"][wildcards.tumors][0]
-    output:
-        protected("results/{tumors}/pileup_summaries.table")
-    params:
-        gatk = config["gatk_path"],
-        known_polymorphic_sites = config["known_polymorphic_sites"]
-    log:
-        "logs/get_pileup_summaries/{tumors}_get_pileup_summaries.txt"
-    shell:
-        "({params.gatk} GetPileupSummaries \
-        -I {input} \
-        -V {params.known_polymorphic_sites} \
-        -L {params.known_polymorphic_sites} \
-        -O {output}) 2> {log}"
-
-
 rule calculate_contamination:
     input:
         "results/{tumors}/pileup_summaries.table"
