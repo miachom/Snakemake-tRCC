@@ -9,17 +9,19 @@ rule all:
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"])
+        expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"]),
+        expand("results/{tumors}/mutect_merged.stats", tumors = config["samples"]),
+        expand("results/{tumors}/read_orientation_model.tar.gz", tumors = config["samples"]),
 
 rule mutect2:
     input:
         tumor_filepath = config["samples"]
         
     output:
-        vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
-        tbi = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-        tar = temp("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-        stats = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
+        vcf = protected("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
+        tbi = protected("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+        tar = protected("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+        stats = protected("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
     params:
         # Edited these to match my config.yaml file
         reference_genome = config["reference_genome"],
@@ -162,23 +164,6 @@ rule learn_read_orientation_model:
         -O {output}) 2> {log}"
 
 
-rule calculate_contamination:
-    input:
-        "results/{tumors}/pileup_summaries.table"
-    output:
-        segments_table = protected("results/{tumors}/segments.table"),
-        contamination_table = protected("results/{tumors}/contamination.table")
-    params:
-        gatk = config["gatk_path"]
-    log:
-        "logs/calculate_contamination/{tumors}_calculate_contamination.txt"
-    shell:
-        "({params.gatk} CalculateContamination \
-        -I {input} \
-        -tumor-segmentation {output.segments_table} \
-        -O {output.contamination_table}) 2> {log}"
-
-
 rule gather_mutect_calls:
     input:
         chr1_calls = "results/{tumors}/unfiltered_chr1.vcf.gz",
@@ -206,12 +191,12 @@ rule gather_mutect_calls:
         chrX_calls = "results/{tumors}/unfiltered_chrX.vcf.gz",
         chrY_calls = "results/{tumors}/unfiltered_chrY.vcf.gz"
     output:
-        temp("results/{tumors}/gathered_unfiltered.vcf.gz")
+        protected("results/{tumors}/gathered_unfiltered.vcf.gz")
     params:
         java = config["java"],
         picard_jar = config["picard_jar"]
     log:
-        "logs/gather_mutect_calls/{tumors}_gather_mutect_calls.txt"
+        protected("logs/gather_mutect_calls/{tumors}_gather_mutect_calls.txt")
     shell:
         "({params.java} -jar {params.picard_jar} GatherVcfs \
         I={input.chr1_calls} \
@@ -239,16 +224,3 @@ rule gather_mutect_calls:
         I={input.chrX_calls} \
         I={input.chrY_calls} \
         O={output}) 2> {log}"
-
-
-rule create_vcf_index:
-    input:
-        "results/{tumors}/gathered_unfiltered.vcf.gz"
-    output:
-        temp("results/{tumors}/gathered_unfiltered.vcf.gz.tbi")
-    params:
-        tabix = config["tabix"]
-    log:
-        "logs/create_vcf_index/{tumors}_create_vcf_index.txt"
-    shell:
-        "(tabix -p vcf {input}) 2> {log}"
