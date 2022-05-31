@@ -10,8 +10,8 @@ rule all:
         #expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         #expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"])
-        expand("results/{tumors}/mutect_merged.stats", tumors = config["samples"]),
-        expand("results/{tumors}/read_orientation_model.tar.gz", tumors = config["samples"]),
+        expand("results/{base_file_name}/mutect_merged.stats", base_file_name = config["base_file_name"]),
+        expand("results/{base_file_name}/read_orientation_model.tar.gz", base_file_name = config["base_file_name"])
 
 
 rule merge_mutect_stats:
