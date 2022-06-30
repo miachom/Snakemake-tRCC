@@ -86,5 +86,5 @@ rule FilterMutectCalls:
            -V /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/read_orientation_model.tar.gz \
            -tumor-segmentation {params.tum_seg} \
            --contamination-table {input.matched_contamination} \
-           --ob-priors /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/read-orientation-model_DTRCC10.tar.gz \
+           --ob-priors /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/read_orientation_model.tar.gz \
            -O {output.filtered_f1r2}) 2> {log}"
