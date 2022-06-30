@@ -53,14 +53,14 @@ rule CalculateContamination:
       input:
          tumor = expand("results/{base_file_name}/tumor_{base_file_name}_pileup.tab",base_file_name=config["base_file_name"]),
          matched = expand("results/{base_file_name}/normal_{base_file_name}_pileup.tab", base_file_name = config["base_file_name"])
-       output:
+      output:
          table = protected("results/{base_file_name}/{base_file_name}_matched_contamination.tab"),
          tum_seg = protected("results/{base_file_name}/{base_file_name}_tum_segments.tab")
-       params:
+      params:
         gatk = config["gatk_path"]
-       log:
+      log:
           "logs/CalculateContamination/{tumor}.log"
-       shell:
+      shell:
           "({params.gatk} CalculateContamination \
           -I {input.tumor} \
           -matched {input.matched} \
