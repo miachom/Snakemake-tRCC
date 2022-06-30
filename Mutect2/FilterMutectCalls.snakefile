@@ -1,6 +1,7 @@
 import os
 
 configfile: "config/config.yaml"
+configfile: "config/samples.yaml"
 
 rule all:
     input:
