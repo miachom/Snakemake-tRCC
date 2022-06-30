@@ -78,7 +78,7 @@ rule FilterMutectCalls:
            "logs/FilterMutectCalls/{tumors}.log"
       params:
            gatk = config["gatk_path"],
-           reference_genome = config["reference_genome"]
+           reference_genome = config["reference_genome"],
            tum_seg = "results/{tumors}/{tumors}_tum_segments.tab"
       shell:
            "({params.gatk} FilterMutectCalls \
