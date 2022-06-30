@@ -68,17 +68,17 @@ rule CalculateContamination:
           -O {output.table}) 2> {log}"
 
 rule FilterMutectCalls:
-        input:
+      input:
            tum_seg = "results/{base_file_name}/{base_file_name}_tum_segments.tab",
            matched_contamination = "results/{base_file_name}/{base_file_name}_matched_contamination.tab"
-        output:
+      output:
            filtered_f1r2 = protected("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz)
-        log:
+      log:
            "logs/FilterMutectCalls/{tumor}.log"
-        params:
+      params:
            gatk = config["gatk_path"],
            reference_genome = config["reference_genome"]
-        shell:
+      shell:
            "({params.gatk} FilterMutectCalls \
            -R {params.reference_genome} \
            -V /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/read_orientation_model.tar.gz \
