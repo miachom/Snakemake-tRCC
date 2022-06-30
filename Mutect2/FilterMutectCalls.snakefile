@@ -60,7 +60,7 @@ rule CalculateContamination:
       params:
         gatk = config["gatk_path"]
       log:
-          "logs/CalculateContamination/{tumor}.log"
+          "logs/CalculateContamination/{tumors}.log"
       shell:
           "({params.gatk} CalculateContamination \
           -I {input.tumor} \
@@ -75,7 +75,7 @@ rule FilterMutectCalls:
       output:
            filtered_f1r2 = protected("results/{tumors}/{tumors}_f1r2_filtered_somatic_vcf.gz")
       log:
-           "logs/FilterMutectCalls/{tumor}.log"
+           "logs/FilterMutectCalls/{tumors}.log"
       params:
            gatk = config["gatk_path"],
            reference_genome = config["reference_genome"]
