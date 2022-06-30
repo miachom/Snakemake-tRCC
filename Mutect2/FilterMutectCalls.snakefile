@@ -79,6 +79,7 @@ rule FilterMutectCalls:
       params:
            gatk = config["gatk_path"],
            reference_genome = config["reference_genome"]
+           tum_seg = "results/{tumors}/{tumors}_tum_segments.tab"
       shell:
            "({params.gatk} FilterMutectCalls \
            -R {params.reference_genome} \
