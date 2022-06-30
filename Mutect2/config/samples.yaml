@@ -1,6 +1,6 @@
 #samples.yaml for mutect2.snakefile
 
-base_file_name : B_TRCC_18
+base_file_name : DTRCC10
 
 samples: /home/mi724/Tools/Snakemake/Mutect2/bam.list
 
