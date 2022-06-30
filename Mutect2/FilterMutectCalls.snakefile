@@ -83,7 +83,7 @@ rule FilterMutectCalls:
       shell:
            "({params.gatk} FilterMutectCalls \
            -R {params.reference_genome} \
-           -V /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/read_orientation_model.tar.gz \
+           -V /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/gathered_unfiltered.vcf.gz \
            -tumor-segmentation {params.tum_seg} \
            --contamination-table {input.matched_contamination} \
            --ob-priors /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/read_orientation_model.tar.gz \
