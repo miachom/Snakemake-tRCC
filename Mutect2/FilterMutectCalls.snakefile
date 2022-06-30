@@ -19,7 +19,7 @@ rule GetPileupSummariesTumor:
         gatk = config["gatk_path"],
         small_exac_common = config["small_exac_common"],
         reference_genome = config["reference_genome"]
-     logs:
+     log:
         "logs/GetPileupSummaries/{tumors}_GetPileupSummaries_tumor.txt"
      shell:
          "({params.gatk} GetPileupSummaries \
@@ -38,7 +38,7 @@ rule GetPileupSummariesNormal:
         gatk = config["gatk_path"],
         small_exac_common = config["small_exac_common"],
         reference_genome = config["reference_genome"]
-     logs:
+     log:
         "logs/GetPileupSummaries/{tumors}_GetPileupSummaries_tumor.txt"
      shell:
          "({params.gatk} GetPileupSummaries \
@@ -58,7 +58,7 @@ rule CalculateContamination:
          tum_seg = protected("results/{base_file_name}/{base_file_name}_tum_segments.tab")
        params:
         gatk = config["gatk_path"]
-       logs:
+       log:
           "logs/CalculateContamination/{tumor}.log"
        shell:
           "({params.gatk} CalculateContamination \
@@ -73,7 +73,7 @@ rule FilterMutectCalls:
            matched_contamination = "results/{base_file_name}/{base_file_name}_matched_contamination.tab"
         output:
            filtered_f1r2 = protected("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz)
-        logs:
+        log:
            "logs/FilterMutectCalls/{tumor}.log"
         params:
            gatk = config["gatk_path"],
