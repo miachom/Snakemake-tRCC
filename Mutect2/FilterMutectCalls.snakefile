@@ -8,13 +8,14 @@ rule all:
         expand("results/{base_file_name}/tumor_{base_file_name}_pileup.tab",base_file_name=config["base_file_name"]),
         expand("results/{base_file_name}/normal_{base_file_name}_pileup.tab", base_file_name = config["base_file_name"]),
         expand("results/{base_file_name}/{base_file_name}_tum_segments.tab", base_file_name = config["base_file_name"]),
-        expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab", base_file_name = config["base_file_name"])
+        expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab", base_file_name = config["base_file_name"]),
+        expand("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz", base_file_name = config["base_file_name"])
         
 rule GetPileupSummariesTumor:
      input:
         tumor_filepath = config["samples"]
      output:
-        table = protected("results/{base_file_name}/tumor_{base_file_name}_pileup.tab")
+        table = protected("results/{tumors}/tumor_{tumors}_pileup.tab")
      params:
         gatk = config["gatk_path"],
         small_exac_common = config["small_exac_common"],
@@ -33,7 +34,7 @@ rule GetPileupSummariesNormal:
      input:
         tumor_filepath = config["samples"]
      output:
-        table = protected("results/{base_file_name}/normal_{base_file_name}_pileup.tab")
+        table = protected("results/{tumors}/normal_{tumors}_pileup.tab")
      params:
         gatk = config["gatk_path"],
         small_exac_common = config["small_exac_common"],
@@ -54,8 +55,8 @@ rule CalculateContamination:
          tumor = expand("results/{base_file_name}/tumor_{base_file_name}_pileup.tab",base_file_name=config["base_file_name"]),
          matched = expand("results/{base_file_name}/normal_{base_file_name}_pileup.tab", base_file_name = config["base_file_name"])
       output:
-         table = protected("results/{base_file_name}/{base_file_name}_matched_contamination.tab"),
-         tum_seg = protected("results/{base_file_name}/{base_file_name}_tum_segments.tab")
+         table = protected("results/{tumors}/{tumors}_matched_contamination.tab"),
+         tum_seg = protected("results/{tumors}/{tumors}_tum_segments.tab")
       params:
         gatk = config["gatk_path"]
       log:
@@ -72,7 +73,7 @@ rule FilterMutectCalls:
            tum_seg = "results/{base_file_name}/{base_file_name}_tum_segments.tab",
            matched_contamination = "results/{base_file_name}/{base_file_name}_matched_contamination.tab"
       output:
-           filtered_f1r2 = protected("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz")
+           filtered_f1r2 = protected("results/{tumors}/{tumors}_f1r2_filtered_somatic_vcf.gz")
       log:
            "logs/FilterMutectCalls/{tumor}.log"
       params:
