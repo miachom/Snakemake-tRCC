@@ -70,8 +70,8 @@ rule CalculateContamination:
 
 rule FilterMutectCalls:
       input:
-           tum_seg = "results/{base_file_name}/{base_file_name}_tum_segments.tab",
-           matched_contamination = "results/{base_file_name}/{base_file_name}_matched_contamination.tab"
+           tum_seg = expand("results/{base_file_name}/{base_file_name}_tum_segments.tab",base_file_name=config["base_file_name"]),
+           matched_contamination =  expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab",base_file_name=config["base_file_name"])
       output:
            filtered_f1r2 = protected("results/{tumors}/{tumors}_f1r2_filtered_somatic_vcf.gz")
       log:
