@@ -72,7 +72,7 @@ rule FilterMutectCalls:
            tum_seg = "results/{base_file_name}/{base_file_name}_tum_segments.tab",
            matched_contamination = "results/{base_file_name}/{base_file_name}_matched_contamination.tab"
       output:
-           filtered_f1r2 = protected("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz)
+           filtered_f1r2 = protected("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz")
       log:
            "logs/FilterMutectCalls/{tumor}.log"
       params:
