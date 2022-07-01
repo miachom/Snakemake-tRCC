@@ -1,8 +1,5 @@
 # Mutect2
-Add: as a rule inside the snakefile
-/mnt/storage/apps/gatk-4.2.5.0/gatk IndexFeatureFile \
-> -I /home/mi724/Tools/Snakemake/Mutect2/results/DTRCC_10/gathered_unfiltered.vcf.gz
-> 
+
 ## Run
 ```
 /mnt/storage/apps/anaconda3/bin/snakemake -s /home/mi724/Tools/Snakemake/Mutect2/gather_mutect_calls.snakefile --cluster-config /home/mi724/Tools/Snakemake/Mutect2/config/cluster_qsub.yaml --cluster "qsub -l h_vmem={cluster.h_vmem},h_rt={cluster.h_rt} -pe {cluster.pe} -binding {cluster.binding}" --jobs 30 --rerun-incomplete
