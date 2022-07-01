@@ -49,42 +49,36 @@ rule Mutect2:
      
 
 rule MergeMutectStats:
-     input:
      output:
         protected("results/{tumors}/mutect_merged.stats")
      params:
         gatk = config["gatk_path"]
      logs:
-        "logs/merge_mutect_stats/{tumors}_merge_mutect_stats.txt"
+        "logs/MergeMutectStats/{tumors}_merge_mutect_stats.txt"
      shell:
-        "({params.gatk} MergeMutectStats \
-        -stats {input.chr1_stats} \
-        -stats {input.chr2_stats} \
-        -stats {input.chr3_stats} \
-        -stats {input.chr4_stats} \
-        -stats {input.chr5_stats} \
-        -stats {input.chr6_stats} \
-        -stats {input.chr7_stats} \
-        -stats {input.chr8_stats} \
-        -stats {input.chr9_stats} \
-        -stats {input.chr10_stats} \
-        -stats {input.chr11_stats} \
-        -stats {input.chr12_stats} \
-        -stats {input.chr13_stats} \
-        -stats {input.chr14_stats} \
-        -stats {input.chr15_stats} \
-        -stats {input.chr16_stats} \
-        -stats {input.chr17_stats} \
-        -stats {input.chr18_stats} \
-        -stats {input.chr19_stats} \
-        -stats {input.chr20_stats} \
-        -stats {input.chr21_stats} \
-        -stats {input.chr22_stats} \
-        -stats {input.chrX_stats} \
-        -stats {input.chrY_stats} \
+        "
+	all_stat_inputs=`for chromosome in {chromosomes}; do
+        printf -- "-stats results/{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
+
+	({params.gatk} MergeMutectStats \
+        $all_stat_inputs \
         -O {output}) 2> {log}"
 
 rule LearnReadOrientationModel:
+      output:
+        protected("results/{tumors}/read_orientation_model.tar.gz")
+      params:
+        gatk = config["gatk_path"]
+      log:
+        "logs/LearnReadOrientationModel/{tumors}_learn_read_orientation_model.txt"
+      shell:
+        "
+	all_f1r2_inputs=`for chromosome in {chromosomes}; do
+        printf -- "-stats results/{tumors}/unfiltered_${chromosome}_f1r2.tar.gz "; done`
+	
+	({params.gatk} LearnReadOrientationModel \
+	$all_f1r2_inputs \
+	-O {output}) 2> {log}"
 
 rule GetPileupSummariesTumor:
      input:
