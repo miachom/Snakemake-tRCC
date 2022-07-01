@@ -18,6 +18,9 @@ rule all:
         expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab", base_file_name = config["base_file_name"]),
         expand("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz", base_file_name = config["base_file_name"])
 
+rule Mutect2:
+
+
 rule MergeMutectStats:
      input:
      output:
