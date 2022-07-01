@@ -53,7 +53,7 @@ rule MergeMutectStats:
         protected("results/{tumors}/mutect_merged.stats")
      params:
         gatk = config["gatk_path"]
-     logs:
+     log:
         "logs/MergeMutectStats/{tumors}_merge_mutect_stats.txt"
      shell:
         "
@@ -63,6 +63,7 @@ rule MergeMutectStats:
 	({params.gatk} MergeMutectStats \
         $all_stat_inputs \
         -O {output}) 2> {log}"
+
 
 rule LearnReadOrientationModel:
       output:
@@ -74,11 +75,30 @@ rule LearnReadOrientationModel:
       shell:
         "
 	all_f1r2_inputs=`for chromosome in {chromosomes}; do
-        printf -- "-stats results/{tumors}/unfiltered_${chromosome}_f1r2.tar.gz "; done`
+        printf -- "-I results/{tumors}/unfiltered_${chromosome}_f1r2.tar.gz "; done`
 	
 	({params.gatk} LearnReadOrientationModel \
 	$all_f1r2_inputs \
 	-O {output}) 2> {log}"
+
+
+rule GatherVcfs:
+      output:
+        protected("results/{tumors}/gathered_unfiltered.vcf.gz")
+      params:
+        java = config["java"],
+        picard_jar = config["picard_jar"]
+      log:
+        protected("logs/gather_mutect_calls/{tumors}_gather_mutect_calls.txt")
+      shell:
+        "
+	all_vcf_inputs=`for chromosome in {chromosomes}; do
+        printf -- "-I results/{tumors}/unfiltered_${chromosome}.vcf.gz "; done`
+	
+	({params.java} -jar {params.picard_jar} GatherVcfs \
+	$all_vcf_inputs \
+        O={output}) 2> {log}"
+
 
 rule GetPileupSummariesTumor:
      input:
@@ -98,6 +118,7 @@ rule GetPileupSummariesTumor:
          -V {params.small_exac_common} \
          -L {params.small_exac_common} \
          -O {output.table}) 2> {log}"
+
 
 rule GetPileupSummariesNormal:
      input:
@@ -137,14 +158,31 @@ rule CalculateContamination:
           -tumor-segmentation {output.tum_seg} \
           -O {output.table}) 2> {log}"
 
+
+rule IndexFeatureFile:
+      input:
+      	  vcf = expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"])
+      outut:
+      	  vcf = protected(("results/{tumor}/gathered_unfiltered.vcf.gz.tbi")
+      params:
+        gatk = config["gatk_path"]
+      log:
+        "logs/IndexFeatureFile/{tumors}.log"
+      shell:
+        "({params.gatk} IndexFeatureFile \
+	-I {input.vcf} \
+	-O {output.vcf}) 2> {log"
+
+
 rule FilterMutectCalls:
       input:
            tum_seg = expand("results/{base_file_name}/{base_file_name}_tum_segments.tab",base_file_name=config["base_file_name"]),
-           matched_contamination =  expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab",base_file_name=config["base_file_name"])
+           matched_contamination =  expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab",base_file_name=config["base_file_name"]),
+	   vcf_index = "results/{tumor}/gathered_unfiltered.vcf.gz.tbi"
       output:
            filtered_f1r2 = protected("results/{tumors}/{tumors}_f1r2_filtered_somatic_vcf.gz")
       log:
-           "logs/FilterMutectCalls/{tumors}.log"
+           "/FilterMutectCalls/{tumors}.log"
       params:
            gatk = config["gatk_path"],
            reference_genome = config["reference_genome"],
