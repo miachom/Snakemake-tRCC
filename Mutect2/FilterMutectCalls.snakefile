@@ -20,7 +20,7 @@ rule all:
 
 rule Mutect2:
      input:
-	tumor_filepath m= lambda wildcards: config["samples"][wildcards.tumor],
+	tumor_filepath = lambda wildcards: config["samples"][wildcards.tumor],
 	normal_filepath = lambda wildcards: config["samples"][config["pairings"][wildcards.tumor]]
      output:
         vcf = protected("results/{tumors}/unfiltered_{chromosomes}.vcf.gz"),
