@@ -19,7 +19,15 @@ rule all:
         expand("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz", base_file_name = config["base_file_name"])
 
 rule Mutect2:
-
+     params:
+        reference_genome = config["reference_genome"],
+        mutect2_germline_resource = config["mutect2_germline_resource"],
+        gatk = config["gatk"],
+        panel_of_normals = config["panel_of_normals"],
+        normals = lambda wildcards: config["samples"][wildcards.tumors][1]
+     log:
+        "logs/mutect2/{tumors}_{chromosomes}_mutect2.txt"
+     
 
 rule MergeMutectStats:
      input:
