@@ -5,12 +5,57 @@ configfile: "config/samples.yaml"
 
 rule all:
     input:
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"]),
+        expand("results/{base_file_name}/mutect_merged.stats", base_file_name = config["base_file_name"]),
+        expand("results/{base_file_name}/read_orientation_model.tar.gz", base_file_name = config["base_file_name"]),
         expand("results/{base_file_name}/tumor_{base_file_name}_pileup.tab",base_file_name=config["base_file_name"]),
         expand("results/{base_file_name}/normal_{base_file_name}_pileup.tab", base_file_name = config["base_file_name"]),
         expand("results/{base_file_name}/{base_file_name}_tum_segments.tab", base_file_name = config["base_file_name"]),
         expand("results/{base_file_name}/{base_file_name}_matched_contamination.tab", base_file_name = config["base_file_name"]),
         expand("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz", base_file_name = config["base_file_name"])
-        
+
+rule MergeMutectStats:
+     input:
+     output:
+        protected("results/{tumors}/mutect_merged.stats")
+     params:
+        gatk = config["gatk_path"]
+     logs:
+        "logs/merge_mutect_stats/{tumors}_merge_mutect_stats.txt"
+     shell:
+        "({params.gatk} MergeMutectStats \
+        -stats {input.chr1_stats} \
+        -stats {input.chr2_stats} \
+        -stats {input.chr3_stats} \
+        -stats {input.chr4_stats} \
+        -stats {input.chr5_stats} \
+        -stats {input.chr6_stats} \
+        -stats {input.chr7_stats} \
+        -stats {input.chr8_stats} \
+        -stats {input.chr9_stats} \
+        -stats {input.chr10_stats} \
+        -stats {input.chr11_stats} \
+        -stats {input.chr12_stats} \
+        -stats {input.chr13_stats} \
+        -stats {input.chr14_stats} \
+        -stats {input.chr15_stats} \
+        -stats {input.chr16_stats} \
+        -stats {input.chr17_stats} \
+        -stats {input.chr18_stats} \
+        -stats {input.chr19_stats} \
+        -stats {input.chr20_stats} \
+        -stats {input.chr21_stats} \
+        -stats {input.chr22_stats} \
+        -stats {input.chrX_stats} \
+        -stats {input.chrY_stats} \
+        -O {output}) 2> {log}"
+
+rule LearnReadOrientationModel:
+
 rule GetPileupSummariesTumor:
      input:
         tumor_filepath = config["samples"]
