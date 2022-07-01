@@ -19,6 +19,11 @@ rule all:
         expand("results/{base_file_name}/{base_file_name}_f1r2_filtered_somatic_vcf.gz", base_file_name = config["base_file_name"])
 
 rule Mutect2:
+     output:
+        vcf = protected("results/{tumors}/unfiltered_{chromosomes}.vcf.gz"),
+        tbi = protected("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+        tar = protected("results/{tumors}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+        stats = protected("results/{tumors}/unfiltered_{chromosomes}.vcf.gz.stats")
      params:
         reference_genome = config["reference_genome"],
         mutect2_germline_resource = config["mutect2_germline_resource"],
@@ -27,6 +32,17 @@ rule Mutect2:
         normals = lambda wildcards: config["samples"][wildcards.tumors][1]
      log:
         "logs/mutect2/{tumors}_{chromosomes}_mutect2.txt"
+     shell:
+        "({params.gatk} Mutect2 \
+        -reference {params.reference_genome} \
+        -input {input.tumor_filepath} \
+        -input {input.normal_filepath} \
+        -normal {params.normals} \
+        -intervals {wildcards.chromosomes} \
+        --germline-resource {params.mutect2_germline_resource} \
+        --f1r2-tar-gz {output.tar} \
+        --panel-of-normals {params.panel_of_normals} \
+        -output {output.vcf}) 2> {log}"
      
 
 rule MergeMutectStats:
