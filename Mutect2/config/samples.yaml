@@ -1,6 +1,6 @@
 #samples.yaml for mutect2.snakefile
 
-base_file_name : DTRCC10
+base_file_name : B_TRCC_18
 
 samples: /home/mi724/Tools/Snakemake/Mutect2/bam.list
 
@@ -9,7 +9,7 @@ vcf_files: /home/mi724/Tools/Snakemake/Mutect2/vcf_file.list
 f1r2: /home/mi724/Tools/Snakemake/Mutect2/f1r2.list
 
 normals: /home/mi724/Tools/Snakemake/Mutect2/normals.list
-  
+ 
 
 samples:
   tumor_sample_name:
